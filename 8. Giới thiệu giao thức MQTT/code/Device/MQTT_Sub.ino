@@ -17,7 +17,7 @@ const int RELAY = 2; // Relay 1stconst char* mqtt_server = "test.mosquitto.org";
 
 // Thông tin tin clientID, publishing, subcribing topic. ClientID nên là duy nhất trong tất cả các ứng dụng
 // Thay đổi thông tin ở đây tương ứng với thông tin các bạn muốn
-const char* clientID = "698ed4c6-dcbf-4bc8-9d53-da66a4f1ab83";
+const char* clientID = "698ed4c6-dcbf-4bc8-9d53-da66a4f1ab83"; // Random UUID
 
 // const char* outTopic = "mqtt/esp/";
 const char* inTopic = "mqtt/esp/test";
