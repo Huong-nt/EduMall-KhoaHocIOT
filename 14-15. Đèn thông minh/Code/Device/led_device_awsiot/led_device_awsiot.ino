@@ -20,7 +20,7 @@ char wifi_password[] = "password";
 int disconnected = 0;
 
 //AWS topic
-char *subscribe_topic = "aws/galaxylab/skill";
+char *subscribe_topic = "aws/light/control/";
 
 //callback to handle mqtt messages
 void messageArrived(MQTT::MessageData &md)

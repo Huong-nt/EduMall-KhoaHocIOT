@@ -1,0 +1,119 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "my light",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": [
+                        "stop",
+                        "cancel"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "help me"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "thanks",
+                        "thank you",
+                        "ok"
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "CommandIntent",
+                    "slots": [
+                        {
+                            "name": "device",
+                            "type": "DEVICE"
+                        },
+                        {
+                            "name": "actionpower",
+                            "type": "ACTIONPOWER"
+                        },
+                        {
+                            "name": "character",
+                            "type": "CHARACTER"
+                        }
+                    ],
+                    "samples": [
+                        "{device} {actionpower}",
+                        "turn the {device} {actionpower}",
+                        "turn {device} {actionpower}",
+                        "turn {actionpower} {device}",
+                        "turn {actionpower} the {device}",
+                        "switch the {device} {actionpower}",
+                        "switch {device} {actionpower}",
+                        "switch {actionpower} {device}",
+                        "switch {actionpower} the {device}",
+                        "turn the {character} room {device} {actionpower}",
+                        "turn {character} room {device} {actionpower}",
+                        "turn {actionpower} {character} room {device}",
+                        "turn {actionpower} the {character} room {device}",
+                        "switch the {character} room {device} {actionpower}",
+                        "switch {character} room {device} {actionpower}",
+                        "switch {actionpower} {character} room {device}",
+                        "switch {actionpower} the {character} room {device}",
+                        "turn {actionpower} the {device} on {character} room",
+                        "turn {actionpower} the {device} on the {character} room",
+                        "{character} room {device} {actionpower}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "ACTIONPOWER",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "on"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "off"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "DEVICE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "fan"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "light"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "CHARACTER",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "meeting"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

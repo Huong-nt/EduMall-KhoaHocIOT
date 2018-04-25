@@ -133,24 +133,28 @@ function handleUserCommand() {
     if (slots != null) {
         console.log(slots)
         var device = slots.device.value.toLowerCase();
-        
+
         switch (device) {
             case "light":
                 let that = this;
                 var iot_message;
-                
+
                 var actionpower = slots.actionpower.value;
                 if (actionpower === 'on') {
                     iot_message = 'on';
                     speechOutput += `Ok, see your light!`;
-                }                    
+                }
                 else {
                     iot_message = 'off';
                     speechOutput += `Your light is off`;
                 }
                 PublishMessage(
                     TOPIC_AWS_IOT,
-                    JSON.stringify(slots),
+                    JSON.stringify({
+                        'type': 'control',
+                        'device': device,
+                        'power': actionpower
+                    }),
                     1,
                     () => {
                         that.emit(':ask', speechOutput, '');
@@ -161,8 +165,8 @@ function handleUserCommand() {
                 break;
         }
     }
-    
-    
+
+
 }
 
 
