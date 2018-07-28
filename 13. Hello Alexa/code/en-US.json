@@ -1,0 +1,46 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "vietnam facts",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "GetNewFactIntent",
+          "samples": [
+            "a fact",
+            "a vietnam fact",
+            "tell me a fact",
+            "tell me a vietnam fact",
+            "give me a fact",
+            "give me a vietnam fact",
+            "tell me trivia",
+            "tell me a vietnam trivia",
+            "give me trivia",
+            "give me a vietnam trivia",
+            "give me some information",
+            "give me some vietnam information",
+            "tell me something",
+            "give me something",
+            "give me something from vietnam"
+          ],
+          "slots": []
+        }
+      ]
+    }
+  }
+}
