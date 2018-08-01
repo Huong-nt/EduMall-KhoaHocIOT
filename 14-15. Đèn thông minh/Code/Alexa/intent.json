@@ -6,7 +6,6 @@
                 {
                     "name": "AMAZON.CancelIntent",
                     "samples": [
-                        "stop",
                         "cancel"
                     ]
                 },
@@ -17,20 +16,14 @@
                     ]
                 },
                 {
-                    "name": "AMAZON.NoIntent",
-                    "samples": []
-                },
-                {
                     "name": "AMAZON.StopIntent",
                     "samples": [
                         "thanks",
                         "thank you",
-                        "ok"
+                        "ok",
+                        "done",
+                        "stop"
                     ]
-                },
-                {
-                    "name": "AMAZON.YesIntent",
-                    "samples": []
                 },
                 {
                     "name": "CommandIntent",
