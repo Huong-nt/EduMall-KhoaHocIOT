@@ -1,0 +1,8 @@
+{
+  "name": "alexa-skill-vietnam-fact",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "ask-sdk": "^2.0.9"
+  }
+}
