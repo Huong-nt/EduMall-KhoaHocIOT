@@ -1,16 +1,17 @@
 'use strict';
 var s3 = require('./s3Controller');
-let constants = require('./constants.js');
+const constants = require('./constants');
 
 var getAudioData = async function () {
-    audioData =[];
-    const rawAudioData = await s3.getListContentFromS3(constants.s3Bucket, constants.s3Prefix);
+    var audioData =[];
+    const rawAudioData = await s3.getListContentFromS3(constants.skill.s3Bucket, constants.skill.s3Prefix);
     
     for (let item of rawAudioData.Contents) {
         if (item.Key && item.Key.endsWith(".mp3")) {
+            var title = item.Key.replace(/us-uk\/|.mp3/gi, '')
             audioData.push({
-                'title': item.Key,
-                'url': constants.s3BucketLink + item.Key
+                'title': title,
+                'url': constants.skill.s3BucketLink + item.Key
             })
         }
     }

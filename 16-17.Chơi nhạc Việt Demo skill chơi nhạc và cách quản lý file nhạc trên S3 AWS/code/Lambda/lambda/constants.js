@@ -4,8 +4,8 @@ exports.skill = {
   appId: '',
   //  DynamoDB Table name
   dynamoDBTableName : 'EdumallAudioPLayer',
-  s3Bucket : 'music-library',
-  s3Prefix : 'nhactre',
-  s3BucketLink : 'https://s3-ap-southeast-1.amazonaws.com/music-library/',
+  s3Bucket : 'my-music-edumall',
+  s3Prefix : 'us-uk',
+  s3BucketLink : 'https://s3.amazonaws.com/my-music-edumall/',
   debug : true
 };

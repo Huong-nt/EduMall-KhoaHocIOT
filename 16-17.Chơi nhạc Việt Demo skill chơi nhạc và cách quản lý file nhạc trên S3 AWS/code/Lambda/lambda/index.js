@@ -400,8 +400,6 @@ const ErrorHandler = {
 /* INTERCEPTORS */
 
 const LoadPersistentAttributesRequestInterceptor = {
-
-
     async process(handlerInput) {
         // TODO: get resources from S3
         audioS3 = await getAudioData();

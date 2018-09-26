@@ -22,23 +22,23 @@ function getListContentFromS3(bucket, prefix) {
     });
 }
 
-function getObjectTagging(bucket, key) {
-    return new Promise((resolve, reject) => {
-        var params = {
-            Bucket: bucket,
-            Key: key
-        };
-        var s3 = new AWS.S3({ apiVersion: '2006-03-01' });
-        s3.getObjectTagging(params, function (err, data) {
-            if (err) {
-                // console.log("Error", err);
-                reject(err);
-            } else {
-                // console.log("Success", data);
-                resolve(data);
-            }
-        });
-    });
-}
+// function getObjectTagging(bucket, key) {
+//     return new Promise((resolve, reject) => {
+//         var params = {
+//             Bucket: bucket,
+//             Key: key
+//         };
+//         var s3 = new AWS.S3({ apiVersion: '2006-03-01' });
+//         s3.getObjectTagging(params, function (err, data) {
+//             if (err) {
+//                 console.log("Error", err);
+//                 reject(err);
+//             } else {
+//                 console.log("Success", data);
+//                 resolve(data);
+//             }
+//         });
+//     });
+// }
 
-module.exports = { getListContentFromS3, getObjectTagging }
+module.exports = { getListContentFromS3 }
