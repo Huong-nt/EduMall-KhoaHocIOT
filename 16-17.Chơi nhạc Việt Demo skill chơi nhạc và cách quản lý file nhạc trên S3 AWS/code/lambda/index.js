@@ -182,95 +182,6 @@ const PausePlaybackHandler = {
     },
 };
 
-const LoopOnHandler = {
-    async canHandle(handlerInput) {
-        const playbackInfo = await getPlaybackInfo(handlerInput);
-        const request = handlerInput.requestEnvelope.request;
-
-        return playbackInfo.inPlaybackSession &&
-            request.type === 'IntentRequest' &&
-            request.intent.name === 'AMAZON.LoopOnIntent';
-    },
-    async handle(handlerInput) {
-        const playbackSetting = await handlerInput.attributesManager.getPersistentAttributes().playbackSettings;
-
-        playbackSetting.loop = true;
-
-        return handlerInput.responseBuilder
-            .speak('Loop turned on.')
-            .getResponse();
-    },
-};
-
-const LoopOffHandler = {
-    async canHandle(handlerInput) {
-        const playbackInfo = await getPlaybackInfo(handlerInput);
-        const request = handlerInput.requestEnvelope.request;
-
-        return playbackInfo.inPlaybackSession &&
-            request.type === 'IntentRequest' &&
-            request.intent.name === 'AMAZON.LoopOffIntent';
-    },
-    async handle(handlerInput) {
-        const playbackSetting = await handlerInput.attributesManager.getPersistentAttributes().playbackSetting;
-
-        playbackSetting.loop = false;
-
-        return handlerInput.responseBuilder
-            .speak('Loop turned off.')
-            .getResponse();
-    },
-};
-
-const ShuffleOnHandler = {
-    async canHandle(handlerInput) {
-        const playbackInfo = await getPlaybackInfo(handlerInput);
-        const request = handlerInput.requestEnvelope.request;
-
-        return playbackInfo.inPlaybackSession &&
-            request.type === 'IntentRequest' &&
-            request.intent.name === 'AMAZON.ShuffleOnIntent';
-    },
-    async handle(handlerInput) {
-        const {
-            playbackInfo,
-            playbackSetting,
-        } = await handlerInput.attributesManager.getPersistentAttributes();
-
-        playbackSetting.shuffle = true;
-        playbackInfo.playOrder = await shuffleOrder();
-        playbackInfo.index = 0;
-        playbackInfo.offsetInMilliseconds = 0;
-        playbackInfo.playbackIndexChanged = true;
-        return controller.play(handlerInput);
-    },
-};
-
-const ShuffleOffHandler = {
-    async canHandle(handlerInput) {
-        const playbackInfo = await getPlaybackInfo(handlerInput);
-        const request = handlerInput.requestEnvelope.request;
-
-        return playbackInfo.inPlaybackSession &&
-            request.type === 'IntentRequest' &&
-            request.intent.name === 'AMAZON.ShuffleOffIntent';
-    },
-    async handle(handlerInput) {
-        const {
-            playbackInfo,
-            playbackSetting,
-        } = await handlerInput.attributesManager.getPersistentAttributes();
-
-        if (playbackSetting.shuffle) {
-            playbackSetting.shuffle = false;
-            playbackInfo.index = playbackInfo.playOrder[playbackInfo.index];
-            playbackInfo.playOrder = [...Array(audioS3.length).keys()];
-        }
-
-        return controller.play(handlerInput);
-    },
-};
-
 const StartOverHandler = {
     async canHandle(handlerInput) {
         const playbackInfo = await getPlaybackInfo(handlerInput);
@@ -465,13 +376,14 @@ const controller = {
         } = playbackInfo;
 
         const playBehavior = 'REPLACE_ALL';
-        const podcast = audioS3[playOrder[index]];
-        const token = playOrder[index];
+        var order = getRandomInt(0, playOrder.length - 1);
+        const song = audioS3[playOrder[order]];
+        const token = playOrder[order];
 
         responseBuilder
-            .speak(`This is ${podcast.title}`)
+            .speak(`This is ${song.title}`)
             .withShouldEndSession(true)
-            .addAudioPlayerPlayDirective(playBehavior, podcast.url, token, offsetInMilliseconds, null);
+            .addAudioPlayerPlayDirective(playBehavior, song.url, token, offsetInMilliseconds, null);
 
         if (await canThrowCard(handlerInput)) {
             const cardTitle = `Playing ${podcast.title}`;
@@ -557,22 +469,8 @@ function getOffsetInMilliseconds(handlerInput) {
     return handlerInput.requestEnvelope.request.offsetInMilliseconds;
 }
 
-function shuffleOrder() {
-    const array = [...Array(audioS3.length).keys()];
-    let currentIndex = array.length;
-    let temp;
-    let randomIndex;
-    // Algorithm : Fisher-Yates shuffle
-    return new Promise((resolve) => {
-        while (currentIndex >= 1) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temp = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temp;
-        }
-        resolve(array);
-    });
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const skillBuilder = alexa.SkillBuilders.standard();
@@ -589,10 +487,6 @@ exports.handler = skillBuilder
         NextPlaybackHandler,
         PreviousPlaybackHandler,
         PausePlaybackHandler,
-        LoopOnHandler,
-        LoopOffHandler,
-        ShuffleOnHandler,
-        ShuffleOffHandler,
         StartOverHandler,
         ExitHandler,
         AudioPlayerEventHandler

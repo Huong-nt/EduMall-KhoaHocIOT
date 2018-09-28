@@ -9,9 +9,10 @@ var getAudioData = async function () {
     for (let item of rawAudioData.Contents) {
         if (item.Key && item.Key.endsWith(".mp3")) {
             var title = item.Key.replace(/us-uk\/|.mp3/gi, '')
+            var key = item.Key.replace(/ /gi, '+')
             audioData.push({
                 'title': title,
-                'url': constants.skill.s3BucketLink + item.Key
+                'url': constants.skill.s3BucketLink + key
             })
         }
     }
