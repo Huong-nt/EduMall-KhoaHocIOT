@@ -3,14 +3,13 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Very basic podcast sample",
+          "summary": "Very basic audio player",
           "examplePhrases": [
             "Alexa, open audio player",
-            "Alexa, ask audio player to begin podcast",
+            "Alexa, ask audio player to play the music",
             "Alexa, ask audio player to stop"
           ],
           "keywords": [
-            "podcast",
             "streaming",
             "example"
           ],
