@@ -91,13 +91,13 @@ const AudioPlayerEventHandler = {
 
                     const enqueueToken = playbackInfo.playOrder[enqueueIndex];
                     const playBehavior = 'ENQUEUE';
-                    const podcast = audioS3[playbackInfo.playOrder[enqueueIndex]];
+                    const song = audioS3[playbackInfo.playOrder[enqueueIndex]];
                     const expectedPreviousToken = playbackInfo.token;
                     const offsetInMilliseconds = 0;
 
                     responseBuilder.addAudioPlayerPlayDirective(
                         playBehavior,
-                        podcast.url,
+                        song.url,
                         enqueueToken,
                         offsetInMilliseconds,
                         expectedPreviousToken,
@@ -386,8 +386,8 @@ const controller = {
             .addAudioPlayerPlayDirective(playBehavior, song.url, token, offsetInMilliseconds, null);
 
         if (await canThrowCard(handlerInput)) {
-            const cardTitle = `Playing ${podcast.title}`;
-            const cardContent = `Playing ${podcast.title}`;
+            const cardTitle = `Playing ${song.title}`;
+            const cardContent = `Playing ${song.title}`;
             responseBuilder.withSimpleCard(cardTitle, cardContent);
         }
 
