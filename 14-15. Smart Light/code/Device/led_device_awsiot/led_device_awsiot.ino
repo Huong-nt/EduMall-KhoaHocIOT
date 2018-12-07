@@ -29,7 +29,7 @@ void messageArrived(MQTT::MessageData &md)
   char *msg = new char[message.payloadlen + 1]();
   memcpy(msg, message.payload, message.payloadlen);
   Serial.println(msg);
-  StaticJsonBuffer<3000> jsonBuffer;
+  StaticJsonBuffer<500> jsonBuffer;
   JsonObject &json_parsed = jsonBuffer.parseObject(msg);
 
   if (!json_parsed.success())
