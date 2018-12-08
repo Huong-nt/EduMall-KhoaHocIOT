@@ -11,6 +11,7 @@
 #include <MQTTClient.h>
 #include "mqtt-command.h"
 
+#define LIGHT_PIN 13
 
 ESP8266WiFiMulti WiFiMulti;
 DynamicJsonBuffer jsonBuffer;
@@ -43,19 +44,22 @@ void messageArrived(MQTT::MessageData &md)
   String power = json_parsed["power"];
   if (type == "control")
   {
-    if (device == "ac")
+    switch (device)
     {
+    case "ac":
+      break;
+    case "light":
       if (power == "on")
       {
-        // digitalWrite(LED, HIGH);
-
-        Serial.println("Turn on the AC");
+        digitalWrite(LIGHT_PIN, HIGH);
+        Serial.println("Turn on the light");
       }
       else if (power == "off")
       {
-        // digitalWrite(LED, LOW);
-        Serial.println("Turn off the AC");
+        digitalWrite(LIGHT_PIN, LOW);
+        Serial.println("Turn off the light");
       }
+      break;
     }
   }
   delete msg;
@@ -69,7 +73,7 @@ void reconnectWifi()
 void onDisconnected(const WiFiEventStationModeDisconnected &event)
 {
   Serial.println("Disconnected");
-      disconnected = 1;
+  disconnected = 1;
   reconnectWifi();
 }
 
@@ -77,7 +81,7 @@ void setup()
 {
   Serial.begin(115200);
   delay(1000);
-
+  pinMode(LIGHT_PIN, OUTPUT);
   //Fill with ssid and wifi password
   WiFiMulti.addAP(wifi_ssid, wifi_password);
   Serial.println("connecting to wifi");
@@ -95,7 +99,6 @@ void setup()
     MQTTCommand::subscribe(subscribe_topic, MQTT::QOS0, &messageArrived);
   }
 }
-
 
 void loop()
 {
@@ -122,5 +125,3 @@ void loop()
     }
   }
 }
-
-
