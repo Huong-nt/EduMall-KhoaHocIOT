@@ -44,11 +44,8 @@ void messageArrived(MQTT::MessageData &md)
   String power = json_parsed["power"];
   if (type == "control")
   {
-    switch (device)
+    if (device == "light") 
     {
-    case "ac":
-      break;
-    case "light":
       if (power == "on")
       {
         digitalWrite(LIGHT_PIN, HIGH);
@@ -59,7 +56,6 @@ void messageArrived(MQTT::MessageData &md)
         digitalWrite(LIGHT_PIN, LOW);
         Serial.println("Turn off the light");
       }
-      break;
     }
   }
   delete msg;
