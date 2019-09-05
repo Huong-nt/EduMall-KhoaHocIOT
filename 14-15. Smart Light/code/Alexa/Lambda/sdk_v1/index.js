@@ -100,7 +100,7 @@ const startStateHandlers = createStateHandler(SKILL_STATES.START, {
 
 
 const commandStateHandlers = createStateHandler(SKILL_STATES.COMMAND, {
-    'AnswerIntent': function () {
+    'CommandIntent': function () {
         handleUserCommand.call(this);
     },
 
