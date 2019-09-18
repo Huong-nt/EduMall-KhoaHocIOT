@@ -34,8 +34,7 @@ const GetNewFactHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'LaunchRequest'
-      || (request.type === 'IntentRequest'
-        && request.intent.name === 'GetNewFactIntent');
+      || (request.type === 'IntentRequest' && request.intent.name === 'GetNewFactIntent');
   },
   handle(handlerInput) {
     const randomFact = data[Math.floor(Math.random() * data.length)];
